@@ -8,7 +8,7 @@ def get_random():
     return Question.objects.order_by("?")[:3]
 
 
-def index(request):
+def question_du_jour(request):
     #form = ChoixForm()
     questionsDuJour = get_random();
     questionReponse = {}
@@ -17,21 +17,20 @@ def index(request):
 
     return render(
         request,
-        'index.html',
+        'question/question_du_jour.html',
         context={'questionsDuJour':questionsDuJour, 'questionReponse':questionReponse},
     )
 
-def question_form(request):
-    form = QuestionForm(request.POST, instance=question)
+#def question_form(request):
+    #form = QuestionForm(request.POST, instance=question)
     
-    return render(request, 'question/question_form.html', locals())
-def questions(request):
-    questions = Question.objects.all()
-    return render(request, 'question/questions.html', {'questions' : questions})
+    #return render(request, 'question/question_form.html', locals())
+#def questions(request):
+    #questions = Question.objects.all()
+    #return render(request, 'question/questions.html', {'questions' : questions})
 
 
-def question(request, id):
+def index(request):
     #question = Question.objects.order_by('?').first()
-    question = get_object_or_404(Question, id=id)
 
-    return render(request, 'question/question_du_jour.html', {'question' : question})
+    return render(request, 'index.html')

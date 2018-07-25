@@ -48,15 +48,15 @@ class User(models.Model):
         ('T','Tout')
     )
     TRANCHE = (
-        ('10', '10'),
-        ('20', '20'),
-        ('30','30'),
-        ('40','40'),
-        ('50','50'),
-        ('60','60'),
-        ('70','70'),
-        ('80','80'),
-        ('90','90')
+        ('10', 'dizaine'),
+        ('20', 'vingtaine'),
+        ('30','trentaine'),
+        ('40','quarantaine'),
+        ('50','cinquantaine'),
+        ('60','soixantaine'),
+        ('70','soixante-dizaine'),
+        ('80','quatre-vingtaine'),
+        ('90','quatre-vingt-dizaine')
     )
 
     nom = models.CharField(max_length=100, verbose_name="Nom utilisateur")
@@ -65,7 +65,7 @@ class User(models.Model):
     age = models.IntegerField(verbose_name="Age", validators=[MaxValueValidator(100), MinValueValidator(15)])
     sexe = models.CharField(max_length=5, verbose_name="Sexe", choices=SEXES)
     interesse_par = models.CharField(max_length=5, verbose_name="Interessé par ", choices=INTERESSE)
-    tranche_age = models.IntegerField(verbose_name="Tranche d'âge recherchée", choices=TRANCHE)
+    tranche_age = models.CharField(max_length=20, verbose_name="Tranche d'âge recherchée", choices=TRANCHE)
     
     #accéder à la liste des choix d'un user : user.choix_set.all()
     class Meta:
