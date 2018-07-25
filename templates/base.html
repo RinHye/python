@@ -1,32 +1,12 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-	
-		<meta name="viewport" content="width=device-width, initial-scale=1", shrink-to-fit=no, user-scalable=no" >
-		<meta name="Pecho bien" content="Pecho bien, Rencontre, Fiable, Sérieux">
-		{% load static %}
-		<!-- Pour image, à mettre au bon endroit : {% static '....jpg' %} -->
-		
-		<link rel="stylesheet" href="css/style.css">
-		<link href="https://fonts.googleapis.com/css?family=Kavivanar" rel="stylesheet">
-		
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	
-		<title>Pecho bien</title>
-	</head>
-	<body>
-		<header>
-			<h1>{% block title %} Pecho bien {% endblock %}</h1>
-		</header>
-		<nav>
-			<ul>
-				<li><a href='{% url 'index' %}'>Accueil</a></li>
-				<li><a href='{% url 'question_du_jour' %}'>Questions du jour</a></li>
-			</ul>
-		</nav>
-		<section class="content">
-			{% block content %}{% endblock %}
-		</section>
-	</body>
-</html>
+{% include 'parties/header.html' %}
+    <h1>{% block title %} {% endblock %}</h1>
+    <header class="masthead">
+        <div class="container d-flex h-100 align-items-center">
+          <div class="mx-auto">
+            <div>
+              {% block content %} {% endblock %}
+            </div>
+          </div>
+        </div>
+      </header>
+{% include 'parties/footer.html' %}
