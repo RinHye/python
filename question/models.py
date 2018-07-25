@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
 
 #Toutes les tables de la BD
@@ -37,11 +37,23 @@ class QuestionReponse(models.Model):
         return self.question
  
 class User(models.Model):
-    
+    SEXES = (
+        ('F', 'Femme'),
+        ('M', 'Homme'),
+        ('A','Ambigu')
+    )
+    INTERESSE = (
+        ('F', 'Femme'),
+        ('M', 'Homme'),
+        ('T','Tout')
+    )
     nom = models.CharField(max_length=100, verbose_name="Nom utilisateur")
     prenom = models.CharField(max_length=100, verbose_name="Prénom utilisateur")
     mail = models.CharField(max_length=100, verbose_name="Mail")
-    age = models.IntegerField(verbose_name="Age")
+    age = models.IntegerField(verbose_name="Age", validators=[MaxValueValidator(100), MinValueValidator(15)])
+    sexe = models.CharField(max_length=5, verbose_name="Sexe", choices=SEXES)
+    interesse_par = models.CharField(max_length=5, verbose_name="Interessé par ", choices=INTERESSE)
+    tranche_age = models.IntegerField(verbose_name="Tranche d'âge")
     #photo = models.ImageField(upload_to='static/photos')
     
     #accéder à la liste des choix d'un user : user.choix_set.all()

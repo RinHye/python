@@ -9,7 +9,7 @@ def get_random():
 
 
 def index(request):
-    form = ChoixForm()
+    #form = ChoixForm()
     questionsDuJour = get_random();
     questionReponse = {}
     for q in questionsDuJour:
