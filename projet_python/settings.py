@@ -62,6 +62,7 @@ TEMPLATES = [
         ],
         'APP_DIRS': True,
         'OPTIONS': {
+            'string_if_invalid': 'Invalid variable!',
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',

@@ -1,17 +1,13 @@
-
 {% extends "base.html" %}
 {% load utils %}
-{% block title %}Pecho bien - Accueil{% endblock %}
+
+{% block title %}Pecho bien - Question du jour{% endblock %}
+
 {% block content %}
-	<h2>Questions du jour</h2>
-	{% for q in questionsDuJour %}
-		<h3>{{ q.titre }}</h3>
-		<p>{{ q.texte }}</p>
-		<select>
-		{% for r in questionReponse|lookup:q %}
-			<option value="{{ r.reponse }}">{{ r.reponse }}</option>
-		{% endfor %}
-		</select>
-	{% endfor %}
-	
+<form method="post">
+    {% csrf_token %}
+    <h3>{{ questionDuJour }}</h3>
+    <p>{{ form }}</p>
+    <input type="submit" value="Envoyer" />
+</form>
 {% endblock %}

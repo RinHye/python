@@ -1,17 +1,14 @@
 from django import forms
-from .models import Question, Reponse, QuestionReponse, User, Choix
+from .models import QuestionReponse, Choix
 
 class ChoixForm(forms.ModelForm):
 
-    class Meta:
-        model = Choix
-        fields = ('question_reponse',)
-'''
-class ContactForm(forms.Form):
-    sujet = forms.CharField(max_length=100)
-    #PasswordInput, RadioSelect et CheckboxInput qui existent
-    message = forms.CharField(widget=forms.Textarea)
-    envoyeur = forms.EmailField(label="Votre adresse e-mail")
-    renvoi = forms.BooleanField(help_text="Cochez si vous souhaitez obtenir une copie du mail envoyé.", required=False)
-    
-'''
+	class Meta:
+		model = Choix
+		fields = ['question_reponse']
+
+	def __init__(self,*args,**kwargs):
+		questionDuJour = kwargs.pop('questionDuJour')
+		super(ChoixForm,self).__init__(*args,**kwargs)
+		qr = QuestionReponse.objects.filter(question=questionDuJour)
+		self.fields['question_reponse'] = forms.ModelChoiceField(queryset=qr, label=questionDuJour.texte)
