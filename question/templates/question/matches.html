@@ -3,4 +3,11 @@
 
 {% block content %}
 <p>Ces profils ont répondu la même chose que vous :</p>
+	{% for match in matchFinal %}
+		Nom : {{ match.nom }}
+		Prénom : {{ match.prénom }}
+		Age : {{ match.age }}
+		Sexe : {{ match.sexe }}
+		Contact : {{ match.mail }}
+	{% endfor %}
 {% endblock %}

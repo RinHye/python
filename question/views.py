@@ -56,7 +56,17 @@ def matches(request):
     match = UserExtra.objects.filter(Q(age_min_voulu__lte=userExtra.age) & \
                                      Q(age_max_voulu__gte=userExtra.age) & \
                                      Q(age__gte=userExtra.age_min_voulu) & \
-                                     Q(age__lte=userExtra.age_max_voulu)) \
+                                     Q(age__lte=userExtra.age_max_voulu) &
+                                     (Q(interesse_par=userExtra.sexe) | Q(interesse_par='T'))) \
                              .exclude(user=user)
-    print(match)
-    return render(request, 'question/matches.html')
+    if (userExtra.interesse_par != 'T'):
+        match.filter(sexe=userExtra.interesse_par)
+
+    choixUser = Choix.objects.filter(user=userExtra)
+    questionReponses = choixUser.values('question_reponse')
+    choix = Choix.objects.select_related('user').filter(question_reponse__in=questionReponses).exclude(user=userExtra)
+    matchChoix = choix.values_list('user', flat=True)
+    users = UserExtra.objects.filter(pk__in=matchChoix)
+    matchFinal = match.intersection(users)
+
+    return render(request, 'question/matches.html', {'matchFinal':matchFinal})
