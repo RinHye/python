@@ -1,10 +1,11 @@
 from django import forms
 from .models import Question, Reponse, QuestionReponse, User, Choix
 
-class QuestionForm(forms.ModelForm):
+class ChoixForm(forms.ModelForm):
+
     class Meta:
-        model = Question
-        fields = '__all__'
+        model = Choix
+        fields = ('question_reponse',)
 '''
 class ContactForm(forms.Form):
     sujet = forms.CharField(max_length=100)

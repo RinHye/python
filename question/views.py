@@ -1,7 +1,7 @@
 from django.shortcuts import HttpResponse, Http404, render, get_object_or_404
 from question import views
 from question.models import Question, QuestionReponse, User, Choix, Reponse
-from question.forms import QuestionForm
+from question.forms import ChoixForm
 from django.views.generic import TemplateView
 
 def get_random():
@@ -9,10 +9,12 @@ def get_random():
 
 
 def index(request):
+    form = ChoixForm()
     questionsDuJour = get_random();
     questionReponse = {}
     for q in questionsDuJour:
         questionReponse[q] = QuestionReponse.objects.filter(question=q)
+
     return render(
         request,
         'index.html',
