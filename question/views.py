@@ -19,8 +19,19 @@ def get_question_du_jour():
     return q.question
 
 def question_du_jour(request):
+    dejaRepondu = False
     questionDuJour = get_question_du_jour()
-    print(request.POST)
+    user = User.objects.get(username=request.user.username)
+    userExtra = UserExtra.objects.get(user=user)
+    choixUser = Choix.objects.filter(user=userExtra)
+    questionReponsesId = choixUser.values_list('question_reponse', flat=True)
+    questionReponses = QuestionReponse.objects.filter(id__in=questionReponsesId)
+    questionsId = questionReponses.values_list('question', flat=True)
+    questions = Question.objects.filter(id__in=questionsId)
+    for question in questions:
+        if question.id == questionDuJour.id :
+            dejaRepondu = True
+
     if request.method == "POST":
         form = ChoixForm(request.POST, questionDuJour=questionDuJour)
         if form.is_valid():
@@ -31,7 +42,7 @@ def question_du_jour(request):
     else:
         form = ChoixForm(questionDuJour=questionDuJour)
 
-    return render(request, 'question/question_du_jour.html', {'questionDuJour':questionDuJour, 'form': form})
+    return render(request, 'question/question_du_jour.html', {'questionDuJour':questionDuJour, 'dejaRepondu':dejaRepondu, 'form': form})
 
 def index(request):
 

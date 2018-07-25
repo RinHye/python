@@ -61,7 +61,7 @@ class Choix(models.Model):
     class Meta:
         verbose_name = "choix"
         ordering = ['user']
-        unique_together = ("user", "date")
+        unique_together = ("question_reponse", "user")
     
     def __str__(self):
         return str(self.question_reponse)

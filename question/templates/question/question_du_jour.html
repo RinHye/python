@@ -7,7 +7,12 @@
 <form method="post">
     {% csrf_token %}
     <h3>{{ questionDuJour }}</h3>
-    <p>{{ form }}</p>
-    <input type="submit" value="Envoyer" />
+    {% if dejaRepondu %}
+    	Vous avez déjà répondu pour aujourd'hui.
+    {% else %}
+    	<p>{{ form }}</p>
+    	<input type="submit" value="Envoyer" />
+    {% endif %}
+    
 </form>
 {% endblock %}
