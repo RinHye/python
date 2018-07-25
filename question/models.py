@@ -54,7 +54,6 @@ class User(models.Model):
     sexe = models.CharField(max_length=5, verbose_name="Sexe", choices=SEXES)
     interesse_par = models.CharField(max_length=5, verbose_name="Interessé par ", choices=INTERESSE)
     tranche_age = models.IntegerField(verbose_name="Tranche d'âge")
-    #photo = models.ImageField(upload_to='static/photos')
     
     #accéder à la liste des choix d'un user : user.choix_set.all()
     class Meta:

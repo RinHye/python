@@ -19,7 +19,7 @@ class QuestionReponseAdmin(admin.ModelAdmin):
     
 class UserAdmin(admin.ModelAdmin):
     
-    list_display = ('nom','prenom', 'mail', 'age')
+    list_display = ('nom','prenom', 'mail', 'age', 'sexe', 'interesse_par', 'tranche_age')
     list_filter = ('nom', 'prenom',)
     ordering = ('nom',)
     search_fields = ('nom', 'prenom')
