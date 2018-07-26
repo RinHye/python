@@ -77,7 +77,7 @@ class UserExtra(models.Model):
         ('T','Tout')
     )
  
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     nom = models.CharField(max_length=100, verbose_name="Nom")
     prenom = models.CharField(max_length=100, verbose_name="Prénom")
     mail = models.CharField(max_length=100, verbose_name="Mail")

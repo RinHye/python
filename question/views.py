@@ -1,11 +1,10 @@
 from django.shortcuts import HttpResponse, Http404, render, redirect, get_object_or_404
 from question import views
 from question.models import Question, QuestionReponse, Choix, Reponse, QuestionDuJour, UserExtra
-from question.forms import ChoixForm, RegisterForm, RegisterExtraForm
+from question.forms import ChoixForm, UserForm, UserExtraForm
 from datetime import date
 from django.views.generic import TemplateView
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Q
 from django.http import request
 
@@ -14,19 +13,25 @@ def index(request):
     return render(request, 'index.html')
 
 def inscription(request):
+    
     if request.method == 'POST':
-        userCreate = RegisterForm(request.POST)
-        extraCreate = RegisterExtraForm(request.POST)
-        if all((userCreate.is_valid(), extraCreate.is_valid())) :
-            user = userCreate.save()
-            userextra = extraCreate.save(commit=False)
+        userform = UserForm(request.POST)
+        extraform = UserExtraForm(request.POST)
+        if all((userform.is_valid(), extraform.is_valid())) :
+            user = userform.save()
+            user.save()
+            
+            userextra = extraform.save(commit = False)
             userextra.user = user
+            
+
             userextra.save()
             return redirect('/profile')
-    else:
-        userCreate = RegisterForm()
-        errors = {'form': userCreate}
-        return render(request, 'accounts/inscription.html', errors)
+    else :
+        userform = UserForm()
+        extraform = UserExtraForm()
+
+    return render(request, 'accounts/inscription.html', {'userform':userform, 'extraform':extraform})
 
 def profile(request):
     info = {'user': request.user}
