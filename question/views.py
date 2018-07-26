@@ -5,6 +5,9 @@ from question.forms import ChoixForm, UserForm, UserExtraForm
 from datetime import date
 from django.views.generic import TemplateView
 from django.contrib.auth.models import User
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 from django.db.models import Q
 from django.http import request
 
@@ -29,40 +32,15 @@ def inscription(request):
 
     return render(request, 'accounts/inscription.html', {'userform':userform, 'extraform':extraform})
 
+@login_required(redirect_field_name='index')
 def profile(request):
-    extra = UserExtra.objects.get(user=request.user.username)
-    print(request.user.username)
+    username = request.user
+    extra = UserExtra.objects.get(user=username)
     userinfo = { 
         'user': request.user,
         'info' : extra
     }
     return render(request, 'accounts/profile.html', userinfo)
-
-    
-
-def index(request):
-    
-    return render(request, 'index.html')
-
-def inscription(request):
-    
-    if request.method == 'POST':
-        userform = UserForm(request.POST)
-        extraform = UserExtraForm(request.POST)
-        if all((userform.is_valid(), extraform.is_valid())) :
-            user = userform.save()
-            user.save()
-            
-            userextra = extraform.save(commit = False)
-            userextra.user = user
-
-            userextra.save()
-            return redirect('/profile')
-    else :
-        userform = UserForm()
-        extraform = UserExtraForm()
-
-    return render(request, 'accounts/inscription.html', {'userform':userform, 'extraform':extraform})
 
 
 def get_random():
