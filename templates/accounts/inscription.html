@@ -1,0 +1,15 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="card py-4 h-100">
+    <h2 class="text-center">Inscription</h2>
+    <div class="card-body">
+        <form method="POST" class="as_p">
+            {% csrf_token %}
+            {{ userform }}
+            {{ extraform }}
+            <button type="submit" class="btn btn-primary">Inscription</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

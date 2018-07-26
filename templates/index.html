@@ -4,11 +4,13 @@
 <div class="card py-4 h-100">
         <h2 class="text-center">Login</h2>
         <div class="card-body">
+        {% if user.is_authenticated %}
             <form method="POST" class="as_p">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit">Connexion</button>
             </form>
+        {% endif %}
         </div>
 </div>
 {% endblock %}

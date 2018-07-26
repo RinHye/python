@@ -1,6 +1,8 @@
 from django import forms
-from .models import QuestionReponse, Choix, UserExtra
+#from django.contrib.sessions import session
 from django.contrib.auth.models import User
+
+from .models import QuestionReponse, Choix, UserExtra
 
 class ChoixForm(forms.ModelForm):
 
@@ -14,6 +16,8 @@ class ChoixForm(forms.ModelForm):
 		qr = QuestionReponse.objects.filter(question=questionDuJour)
 		self.fields['question_reponse'] = forms.ModelChoiceField(queryset=qr, label=questionDuJour.texte)
 
+<<<<<<< HEAD
+=======
 class UserForm(forms.ModelForm):
 
 	class Meta:
@@ -25,3 +29,5 @@ class UserExtraForm(forms.ModelForm):
 	class Meta:
 		model = UserExtra
 		fields = ['nom', 'prenom', 'mail', 'age', 'sexe', 'interesse_par', 'age_min_voulu', 'age_max_voulu']
+>>>>>>> 8c99725a414ac61ca30dc5a5ad29ac7fd86712ee
+
