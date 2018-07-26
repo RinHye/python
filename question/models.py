@@ -53,7 +53,7 @@ class QuestionDuJour(models.Model):
 class Choix(models.Model):
     
     question_reponse = models.ForeignKey('QuestionReponse', on_delete=models.CASCADE, null=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    user = models.ForeignKey('UserExtra', on_delete=models.CASCADE, null=False)
     date = models.DateField(auto_now_add=True)
 
     #en requete possibilite de faire : c.user.nom
@@ -61,7 +61,7 @@ class Choix(models.Model):
     class Meta:
         verbose_name = "choix"
         ordering = ['user']
-        unique_together = ("user", "date")
+        unique_together = ("question_reponse", "user")
     
     def __str__(self):
         return str(self.question_reponse)
@@ -69,8 +69,7 @@ class Choix(models.Model):
 class UserExtra(models.Model):
     SEXES = (
         ('F', 'Femme'),
-        ('M', 'Homme'),
-        ('A','Ambigu')
+        ('M', 'Homme')
     )
     INTERESSE = (
         ('F', 'Femme'),
