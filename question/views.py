@@ -36,7 +36,7 @@ def question_du_jour(request):
         form = ChoixForm(request.POST, questionDuJour=questionDuJour)
         if form.is_valid():
             choix = form.save(commit=False)
-            choix.user = User.objects.get(username=request.user.username)
+            choix.user = userExtra
             choix.save()
             return redirect('matches')
     else:
