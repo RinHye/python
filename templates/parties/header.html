@@ -33,11 +33,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
+            {% if not user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="{% url 'question_du_jour' %}">Questions du jour</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="">Contact</a>
             </li>
           </ul>
         </div>

@@ -13,38 +13,6 @@ def index(request):
     return render(request, 'index.html')
 
 def inscription(request):
-    if request.method == 'POST':
-        userform = UserForm(request.POST)
-        extraform = UserExtraForm(request.POST)
-        if all((userform.is_valid(), extraform.is_valid())) :
-            user = userform.save()
-            user.save()
-            userextra = extraform.save(commit = False)
-            userextra.user = user
-            userextra.save()
-            return redirect('index')
-    else :
-        userform = UserForm()
-        extraform = UserExtraForm()
-
-    return render(request, 'accounts/inscription.html', {'userform':userform, 'extraform':extraform})
-
-def profile(request):
-    extra = UserExtra.objects.get(user=request.user.username)
-    print(request.user.username)
-    userinfo = { 
-        'user': request.user,
-        'info' : extra
-    }
-    return render(request, 'accounts/profile.html', userinfo)
-
-    
-
-def index(request):
-    
-    return render(request, 'index.html')
-
-def inscription(request):
     
     if request.method == 'POST':
         userform = UserForm(request.POST)
@@ -55,6 +23,7 @@ def inscription(request):
             
             userextra = extraform.save(commit = False)
             userextra.user = user
+            
 
             userextra.save()
             return redirect('/profile')
@@ -64,6 +33,11 @@ def inscription(request):
 
     return render(request, 'accounts/inscription.html', {'userform':userform, 'extraform':extraform})
 
+def profile(request):
+    info = {'user': request.user}
+    return render(request, 'accounts/profile.html', info)
+
+    
 
 def get_random():
     return Question.objects.order_by("?").first()
@@ -89,6 +63,10 @@ def question_du_jour(request):
     for question in questions:
         if question.id == questionDuJour.id :
             dejaRepondu = True
+<<<<<<< HEAD
+
+=======
+>>>>>>> 8c99725a414ac61ca30dc5a5ad29ac7fd86712ee
     if request.method == "POST":
         form = ChoixForm(request.POST, questionDuJour=questionDuJour)
         if form.is_valid():
@@ -100,6 +78,13 @@ def question_du_jour(request):
         form = ChoixForm(questionDuJour=questionDuJour)
 
     return render(request, 'question/question_du_jour.html', {'questionDuJour':questionDuJour, 'dejaRepondu':dejaRepondu, 'form': form})
+<<<<<<< HEAD
+
+def index(request):
+
+    return render(request, 'index.html')
+=======
+>>>>>>> 8c99725a414ac61ca30dc5a5ad29ac7fd86712ee
 
 def matches(request):
     user = User.objects.get(username=request.user.username)
