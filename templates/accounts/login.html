@@ -5,11 +5,20 @@
         <div class="card-body">
             <form method="POST" class="as_p">
                 {% csrf_token %}
-                {{ form.as_p }}
+                <label for="id_username">Nom d'utilisateur :</label>
+                <div class="form-group">
+                    {{ form.username }}
+                </div>
+                <label for="id_password">Mot de Passe :</label>
+                <div class="form-group">
+                    {{ form.password }}
+                </div>
                 <button type="submit" class="btn btn-primary">Connexion</button>
             </form>
             <hr>
-            <a href="{% url 'inscription' %}">Inscription</a>
+            <div class="text-center">
+                <a href="{% url 'inscription' %}">Inscription</a>
+            </div>
         </div>
 </div>
 {% endblock %}

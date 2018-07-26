@@ -1,12 +1,83 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="card py-4 h-100">
-    <h2 class="text-center">Inscription</h2>
+<div class="card">
+    <div class="card-header">
+        <h2 class="text-center">Inscription</h2>
+    </div>
     <div class="card-body">
         <form method="POST" class="as_p">
             {% csrf_token %}
-            {{ userform }}
-            {{ extraform }}
+            <label for="id_username">Username :</label>
+            <div class="form-group">
+                {{ userform.username }}
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="id_password1">Mot de Passe :</label>
+                    <div class="form-group">
+                        {{ userform.password1 }}
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="id_password2">Confirmation :</label>
+                    <div class="form-group">
+                        {{ userform.password2 }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="id_nom">Nom :</label>
+                    <div class="form-group">
+                        {{ extraform.nom }}
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="id_prenom">Prenom :</label>
+                    <div class="form-group">
+                        {{ extraform.prenom }}
+                    </div>
+                </div>
+            </div>
+            <label for="id_mail">Mail :</label>
+            <div class="form-group">
+                {{ extraform.mail }}
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="id_age">Age :</label>
+                    <div class="form-group">
+                        {{ extraform.age }}
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="id_sexe">Sexe :</label>
+                    <div class="form-group">
+                        {{ extraform.sexe }}
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="id_interesse_par">Intéressé par :</label>
+                    <div class="form-group">
+                        {{ extraform.interesse_par }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="id_age_min_voulu">Age Minimal Voulu :</label>
+                    <div class="form-group">
+                        {{ extraform.age_min_voulu }}
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="id_age_max_voulu">Age Maximal Voulu :</label>
+                    <div class="form-group">
+                        {{ extraform.age_max_voulu }}
+                    </div>
+                </div>
+            </div>
+            </div>
             <button type="submit" class="btn btn-primary">Inscription</button>
         </form>
     </div>

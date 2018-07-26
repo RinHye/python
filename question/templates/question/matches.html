@@ -1,13 +1,35 @@
 {% extends "base.html" %}
-{% block title %}Pecho bien - Match{% endblock %}
-
 {% block content %}
-<p>Ces profils ont répondu la même chose que vous :</p>
-	{% for match in matchFinal %}
-		Nom : {{ match.nom }}
-		Prénom : {{ match.prénom }}
-		Age : {{ match.age }}
-		Sexe : {{ match.sexe }}
-		Contact : {{ match.mail }}
-	{% endfor %}
+<div class="card py-4 h-100">
+	<div class="form-group">
+		<h2 class="text-center">Pecho bien - Match</h2>
+	</div>
+    <div class="card-body">
+		<p class="text-center">Ces profils ont répondu la même chose que vous :</p>
+		<div class="form-group">
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+						<th scope="col">Nom</th>
+						<th scope="col">Prénom</th>
+						<th scope="col">Age</th>
+						<th scope="col">Sexe</th>
+						<th scope="col">Contact</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for match in matchFinal %}
+					<tr>
+						<th scope="row">{{ match.nom }}</th>
+						<td>{{ match.prenom }}</td>
+						<td>{{ match.age }}</td>
+						<td>{{ match.sexe }}</td>
+						<td>{{ match.mail }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
 {% endblock %}

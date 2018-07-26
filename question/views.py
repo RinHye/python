@@ -54,6 +54,7 @@ def get_question_du_jour():
         q.save()
     return q.question
 
+@login_required(redirect_field_name='index')
 def question_du_jour(request):
     dejaRepondu = False
     questionDuJour = get_question_du_jour()
@@ -79,6 +80,7 @@ def question_du_jour(request):
 
     return render(request, 'question/question_du_jour.html', {'questionDuJour':questionDuJour, 'dejaRepondu':dejaRepondu, 'form': form})
 
+@login_required(redirect_field_name='index')
 def matches(request):
     user = User.objects.get(username=request.user.username)
     userExtra = UserExtra.objects.get(user=user)

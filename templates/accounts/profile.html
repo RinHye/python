@@ -3,11 +3,26 @@
 <div class="card py-4 h-100">
         <h2 class="text-center">Profil</h2>
         <div class="card-body">
-           {{info.prenom}}
-           {{info.nom}}
-           {{info.prenom}}
-           {{info.age}}
-           {{info.mail}}
+            <div class="form-group">
+                <label for="id_username">Username :</label>
+                <div id="id_username">{{info.prenom}}</div>
+            </div>
+            <div class="form-group">
+                    <label for="id_nom">Nom :</label>
+                    <div id="id_nom">{{info.nom}}</div>
+            </div>
+            <div class="form-group">
+                <label for="id_prenom">Prenom :</label>
+                <div id="id_prenom">{{info.prenom}}</div>
+            </div>
+            <div class="form-group">
+                <label for="id_age">Age :</label>
+                <div id="id_age">{{info.age}}</div>
+            </div>
+            <div class="form-group">
+                <label for="id_mail">Mail :</label>
+                <div id="id_mail">{{info.mail}}</div>
+            </div>
         </div>
 </div>
 {% endblock %}

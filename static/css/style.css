@@ -5,3 +5,7 @@ html {
 .black {
 	color: black !important;
 }
+
+.centerButton{
+	margin-right: 250px !important;
+}

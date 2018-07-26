@@ -1,14 +1,21 @@
 {% extends "base.html" %}
 {% load utils %}
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    <h3>{{ questionDuJour }}</h3>
-    {% if dejaRepondu %}
-+    	Vous avez déjà répondu pour aujourd'hui.
-+    {% else %}
-+    	<p>{{ form }}</p>
-+    	<input type="submit" value="Envoyer" />
-+    {% endif %}
-</form>
+<div class="card py-4 h-100">
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <h2 class="text-center">{{ questionDuJour }}</h2>
+            <br>
+            {% if dejaRepondu %}
+            	Vous avez déjà répondu pour aujourd'hui.
+            {% else %}
+            <div class="text-center">
+            	<p>{{ form }}</p>
+                <button type="submit" class="btn btn-primary">Envoyer</button>
+            </div>
+            {% endif %}
+        </form>
+    </div>
+</div>
 {% endblock %}
