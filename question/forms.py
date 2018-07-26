@@ -1,6 +1,6 @@
 from django import forms
-#from django.contrib.sessions import session
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 from .models import QuestionReponse, Choix, UserExtra
 
@@ -16,11 +16,11 @@ class ChoixForm(forms.ModelForm):
 		qr = QuestionReponse.objects.filter(question=questionDuJour)
 		self.fields['question_reponse'] = forms.ModelChoiceField(queryset=qr, label=questionDuJour.texte)
 
-class UserForm(forms.ModelForm):
+class UserForm(UserCreationForm):
 
 	class Meta:
 		model = User
-		fields = ['username']
+		fields = ('username', 'password1', 'password2')	
 
 class UserExtraForm(forms.ModelForm):
 	

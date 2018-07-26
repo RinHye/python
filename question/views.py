@@ -13,20 +13,16 @@ def index(request):
     return render(request, 'index.html')
 
 def inscription(request):
-    
     if request.method == 'POST':
         userform = UserForm(request.POST)
         extraform = UserExtraForm(request.POST)
         if all((userform.is_valid(), extraform.is_valid())) :
             user = userform.save()
             user.save()
-            
             userextra = extraform.save(commit = False)
             userextra.user = user
-            
-
             userextra.save()
-            return redirect('/profile')
+            return redirect('index')
     else :
         userform = UserForm()
         extraform = UserExtraForm()
@@ -34,8 +30,13 @@ def inscription(request):
     return render(request, 'accounts/inscription.html', {'userform':userform, 'extraform':extraform})
 
 def profile(request):
-    info = {'user': request.user}
-    return render(request, 'accounts/profile.html', info)
+    extra = UserExtra.objects.get(user=request.user.username)
+    print(request.user.username)
+    userinfo = { 
+        'user': request.user,
+        'info' : extra
+    }
+    return render(request, 'accounts/profile.html', userinfo)
 
     
 

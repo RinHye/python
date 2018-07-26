@@ -9,7 +9,7 @@ urlpatterns = [
 	url(r'^$', login, {'template_name': 'accounts/login.html'}, name='index'),
     path('logout', logout, {'template_name': 'accounts/logout.html'}, name='logout' ),
 	path('inscription', views.inscription, name='inscription'),
-	path('profile', views.profile, name='profile'),
+	url('profile', views.profile, name='profile'),
 	path('matches', views.matches, name='matches'),
 	path('question_du_jour', views.question_du_jour, name='question_du_jour')
 ]

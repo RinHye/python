@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="card py-4 h-100">
-        <h2 class="text-center">Bonjor {{ user.first_name }}</h2>
+        <h2 class="text-center">Profil</h2>
         <div class="card-body">
-            
+           {{info.prenom}}
+           {{info.nom}}
+           {{info.prenom}}
+           {{info.age}}
+           {{info.mail}}
         </div>
 </div>
 {% endblock %}
